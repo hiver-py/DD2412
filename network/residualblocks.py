@@ -39,7 +39,8 @@ class ResNetBlock(nn.Module):
         self.stride = stride
         self.drop_out = drop_out
         self.downsample = downsample
-
+        self.expansion = 1
+        
         if self.wide:
             self.bn1 = nn.BatchNorm2d(inplanes)
             self.conv1 = nn.Conv2d(inplanes, planes, kernel_size=3, padding=1, bias=True)

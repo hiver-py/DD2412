@@ -29,9 +29,9 @@ def conv3x3(in_planes, planes, stride=1):
 
 
 
-class ResNetBlock(nn.Module):
-    def __init__(self, inplanes, planes, wide, stride = 1, drop_out = 0, downsample = None):
-        super(ResNetBlock, self).__init__()
+class Block(nn.Module):
+    def __init__(self, inplanes, planes, wide = True, stride = 1, drop_out = 0, downsample = None):
+        super(Block, self).__init__()
         self.inplanes = inplanes
         self.planes = planes
         # Wide is a True/False depending on if its wide resnet or regular.

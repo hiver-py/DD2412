@@ -48,9 +48,6 @@ def get_output(model, device, batch):
             output = model(inputs)
             preds = F.softmax(output, dim=1)
             predictions.append(preds.numpy())
-            if len(targets.size())==1:
-                l = F.cross_entropy(output, targets, reduction='none')
-            else:
-                l = -torch.sum(F.log_softmax(output, dim=1)*targets, dim=1)
+            l = F.cross_entropy(output, targets, reduction='none')
             loss.append(l.numpy())
     return predictions, loss

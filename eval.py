@@ -18,7 +18,7 @@ def training(model, classes, optimizer, momentum_optimizer, sigma, batches):
         l.backward()
         optimizer.step()
         momentum_optimizer.step()
-        l += input.size(0)*loss.item()
+        l += input.size(0)*l.item()
         acc = prediction.eq(target.view_as(prediction)).sum().item()
     accuracy = acc/n
     loss = l/n

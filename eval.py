@@ -19,13 +19,12 @@ def training(model, classes, optimizer, momentum_optimizer, sigma, batches):
         optimizer.step()
         momentum_optimizer.step()
         l += input.size(0)*l.item()
-        acc = prediction.eq(target.view_as(prediction)).sum().item()
+        acc = prediction.eq(target.view(prediction.size())).sum().item()
     accuracy = acc/n
     loss = l/n
     return accuracy, loss
 
 
-#tensor.view_as(other) is equivalent to tensor.view(other.size())
 def train(args, model, classes, optimizer, ema_optimizer, device, loader):
     model.train()
     train_loss = 0

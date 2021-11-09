@@ -1,7 +1,7 @@
 import torch
 import torch.nn.functional as F
 
-def training(model, classes, optimizer, momentum_optimizer, sigma, batches):
+def training(model, optimizer, momentum_optimizer, sigma, batches):
     device = torch.device('cuda:'+str(0) if torch.cuda.is_available() else 'cpu')
     torch.cuda.set_device(0)
     l, acc = 0
@@ -19,11 +19,22 @@ def training(model, classes, optimizer, momentum_optimizer, sigma, batches):
         optimizer.step()
         momentum_optimizer.step()
         l += input.size(0)*l.item()
-        acc = prediction.eq(target.view(prediction.size())).sum().item()
+        acc += prediction.eq(target.view(prediction.size())).sum().item()
     accuracy = acc/n
     loss = l/n
     return accuracy, loss
 
-def testing():
-    raise NotImplementedError
-    
+def testing(model, batches):
+    device = torch.device('cuda:'+str(0) if torch.cuda.is_available() else 'cpu')
+    torch.cuda.set_device(0)
+    l, acc = 0
+    n = batches.size(0)
+    model.eval()
+    with torch.nograd():
+        for input, target in batches:
+            output = model(input)          
+            l += F.cross_entropy(output, target, reduction='sum').item()
+            prediction = output.argmax(dim=1, keepdim=True)
+            acc +=  prediction.eq(target.view(prediction.size())).sum().item()
+    accuracy = acc/n
+    return accuracy

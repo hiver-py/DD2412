@@ -137,7 +137,7 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
-# custom
+# custom, exclude data but not readme and noisy labels files
 data/cifar10/cifar-10-batches-py/
 data/cifar10/cifar-10-python.tar.gz
 data/cifar100/cifar-100-python/

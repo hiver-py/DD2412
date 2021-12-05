@@ -8,7 +8,7 @@ Make a virtual env and isntall dependencies from the ```environment.yml``` file.
 
 ## Run
 
-Run the ```main.ipynb``` notebook.
+Run the ```main.py``` notebook.
 
 ## Logs
 
@@ -33,3 +33,20 @@ Available noisy data sets for CIFAR-10 (p=0.4): sym (paper, mine), asym (paper, 
 Training Times per Computational Resources
 - exp_2021-11-25 13:17:26.851200: 1 h 31 m with 1 x V100
 get times and final test accs from runs/
+
+---
+Cifar100
+
+| `model` / `noise` | sym |  | asym |  | dependent |  | openset |  |
+| - | - | - | - | - | - | - | - | - |
+|  | paper | custom | paper | custom | paper | custom | paper | custom |
+| CE | exp_2021-11-29 13:02:42.947124 | exp_2021-11-29 15:14:24.277293  | exp_2021-12-02 17:15:05.141925 | exp_2021-12-02 20:50:30.272408 | exp_2021-12-03 12:09:50.374569 | x | x | x |
+| SLN | exp_2021-11-29 13:12:28.474547 | exp_2021-11-29 15:15:36.143703 | exp_2021-12-02 17:34:08.440889 | exp_2021-12-02 20:55:53.387841 | exp_2021-12-03 14:37:51.783033 | x | x | x |
+|  SLN+MO | exp_2021-11-29 13:16:11.590910 | exp_2021-11-29 22:15:08.652843 | exp_2021-12-02 17:39:34.952358 | exp_2021-12-03 11:53:37.290785 | exp_2021-12-03 14:43:27.237441 | x | x | x |
+| SLN+MO+LC | exp_2021-11-29 22:04:19.910053 | exp_2021-11-29 22:26:18.532929 | exp_2021-12-02 20:43:32.204172 | exp_2021-12-03 12:01:04.662910 | exp_2021-12-03 14:51:11.441549 | x | x | x |
+
+
+HP search
+
+cifar10, sym, noise from paper: hp_2021-12-03_13-18-02 (sigma=[0.1, 0.2, 0.5, 1.0]) -> best 1.0 (good)
+cifar10, sym, custom noise: hp_2021-12-04_17-04-54 (sigma=[0.1, 0.2, 0.5, 1.0]) -> best 1.0 (good)
